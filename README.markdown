@@ -6,9 +6,9 @@ A little gem to add your npm modules to the Rails asset pipeline
 
 The rails asset pipeline is excellent at packaging and serving javascript (and coffeescript). 
 But you still have to get these libraries into your app somehow.  NPM is the standard in the 
-javascript world for distributing and packaging libraries (think rubygems), how bout we
+javascript world for distributing and packaging libraries (think rubygems).  How bout we
 just use that, rather than have to go make asset gems for each javascript library we
-want to use.
+want to use?
 
 ## How?
 
