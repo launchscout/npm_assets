@@ -40,9 +40,9 @@ directive:
     
 ## Why not?
 
-This gem really doesn't deal with the issue of namespacing, so it may not work with some npms.  
-In the future, I'd like to add a separate directive (npm_require maybe?) to bring in npms
-and assign them to a namespace, but for now this gem will only help you with npm libraries than
-no how to deal with being in the browser (eg don't use exports if it's not present).
+This gem really doesn't deal with the issue of namespacing, so it may not work with some npms.  In the future, I'd like to add a separate directive (npm_require maybe?) to bring in npms
+and assign them to a namespace, but for now this gem will only help you with npm libraries than know how to deal with being in the browser (eg don't use exports if it's not present). 
+Also, it you still have to add a require directive for each file, it won't grab dependencies for you (yet).
 
-For an alternative solution, see nodeify.
+For an alternative solution, see nodeify.  If you're down with having all your javascript code follow commonjs 
+module semantics, it seems like a good bet.
