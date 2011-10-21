@@ -1,5 +1,6 @@
 namespace :npm_assets do
-    
+  
+  desc "go thru all the coffee files, look for require_npm and add dependencies to package.json"
   task :build_package_json => :environment do
     npms = []
     FileList["app/assets/javascripts/**/*.coffee", "spec/javascripts/**/*.coffee"].each do |f|
@@ -16,6 +17,7 @@ namespace :npm_assets do
     File.open("package.json", "w")  { |f| f.puts pkg.to_json }
   end
   
+  desc "run npm install"
   task :install => :build_package_json do
     exec "npm install"
   end
