@@ -10,7 +10,11 @@ namespace :npm_assets do
       end
     end
     puts npms.inspect
-    pkg = ActiveSupport::JSON.decode(File.read("package.json"))
+    if File.exist?("package.json")
+      pkg = ActiveSupport::JSON.decode(File.read("package.json"))
+    else
+      pkg = {"name" => Rails.application.class.parent.to_s, "version" => "0.0.1", "dependencies" => {}}
+    end
     npms.each do |npm|
       pkg["dependencies"][npm] = "*" unless pkg["dependencies"].keys.include?(npm)
     end
