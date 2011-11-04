@@ -10,33 +10,26 @@ javascript world for distributing and packaging libraries (think rubygems).  How
 just use that, rather than have to go make asset gems for each javascript library we
 want to use?
 
+## Prerequisites
+
+You'll need npm and node installed for this all to work.
+
 ## How?
 
-You'll need to install node and npm first.  Next, create a package.json file to
-declare the npm libraries you need like so:
+In your app, to actually bring in the codez, we've added a new directive to indicate which 
+npms your application requires.  Use it just like reuiqre
 
-    {
-      "name": "foo",
-      "version": "0.0.1",
-      "dependencies": {
-        "coffeekup": "",
-        "backbone": ""
-      }
-    }
-    
-Then, 
+    #= require_npm underscore
+    #= require_npm backbone
 
-    $ npm install
+Next, to actually grab those npms, we have rake task which creates or modifies a package.json file
+and does an "npm install":
+
+    $ rake npm_assets:install
     
 This will grab the dependencies and pop em in a node_modules directory.  This gem
 will then come along and add the appropriate directories from within
-each module to the asset path
-
-In your app, to actually bring in the codez, it's just a normal require
-directive:
-
-    //= require underscore
-    //= require backbone
+each module to the asset path.
     
 ## Why not?
 
