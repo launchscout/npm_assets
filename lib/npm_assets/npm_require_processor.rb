@@ -1,4 +1,5 @@
 module NpmAssets
+  require 'sprockets'
   class NpmRequireProcessor < Sprockets::DirectiveProcessor
     
     def process_require_npm_directive(path)
