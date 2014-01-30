@@ -3,9 +3,11 @@ namespace :npm_assets do
   desc "go thru all the coffee files, look for require_npm and add dependencies to package.json"
   task :build_package_json => :environment do
     npms = []
-    FileList["app/assets/javascripts/**/*.coffee", "spec/javascripts/**/*.coffee"].each do |f|
+    FileList["app/assets/javascripts/**/*.coffee", "spec/javascripts/**/*.coffee",
+             "app/assets/javascripts/**/*.js", "spec/javascripts/**/*.js"].each do |f|
+      require_matcher = f.ends_with?("coffee") ? /^#=\s+require_npm\s+([\w_-]*)/ : /^\/\/=\s+require_npm\s+([\w_-]*)/
       File.new(f).each_line do |line|
-        match = line.match(/^#=\s+require_npm\s+([\w_-]*)/)
+        match = line.match(require_matcher)
         npms << match[1] if match
       end
     end
