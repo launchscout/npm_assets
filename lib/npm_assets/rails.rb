@@ -7,9 +7,14 @@ module NpmAssets
     end
     initializer "npm_assets.add_asset_paths" do |app|
       FileList["#{app.root}/**/node_modules/*"].each do |dir|
-        package = ActiveSupport::JSON.decode(File.read(File.join(dir, "package.json")))
-        match = package["main"].match(/.*\//)
-        app.config.assets.paths << (match ? File.join(dir, match[0]) : dir)
+        file_name = File.join(dir, "package.json")
+        if File.exist?(file_name)
+          package = ActiveSupport::JSON.decode(File.read(file_name))
+          match = package["main"].match(/.*\//)
+          app.config.assets.paths << (match ? File.join(dir, match[0]) : dir)
+        else
+          puts "When searching for npm_assets, file not found: #{file_name}"
+        end
       end
     end
     rake_tasks do
